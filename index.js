@@ -19,33 +19,6 @@ app.get("/", (req, res) => {
   res.send("works");
 });
 
-app.post("/create-checkout-session", async (req, res) => {
-  // token that contains the info on the product and user
-  const { order, token } = req.body;
-  console.log("order", order);
-  console.log("price", order.price);
-
-  const session = await stripe.checkout.sessions.create({
-    payment_method_type: ["card"],
-    line_items: [
-      {
-        price_data: {
-          currency: "INR",
-          product_data: order,
-          unit_amount: order.price * 100,
-          quantity: order.quantity,
-        },
-      },
-    ],
-
-    mode: "payment",
-    successUrl: process.env.url + "/success",
-    cancel_url: process.env.url + "/cancel",
-  });
-
-  res.json({ id: session.id });
-});
-
 app.post("/payment", (req, res) => {
   // token that contains the info on the product and user
   const { order, token } = req.body;
