@@ -20,33 +20,27 @@ app.get("/", (req, res) => {
 });
 
 app.post("/create-checkout-session", async (req, res) => {
-  // token that contains the info on the product and user
-  const { order, token } = req.body;
-  console.log("order", order);
-  console.log("price", order.price);
-
+  const { cart } = req.body;
   const session = await stripe.checkout.sessions.create({
-    payment_method_type: ["card"],
+    payment_method_types: ["card"],
     line_items: [
       {
         price_data: {
-          currency: "INR",
-          product_data: order,
-          unit_amount: order.price * 100,
-          quantity: order.quantity,
+          currency: "inr",
+          product_data: cart,
+          unit_amount: 100 * 100,
         },
+        quantity: 1,
       },
     ],
-
     mode: "payment",
-    successUrl: process.env.url + "/success",
-    cancel_url: process.env.url + "/cancel",
+    success_url: "https://example.com/success",
+    cancel_url: "https://example.com/cancel",
   });
 
   res.json({ id: session.id });
 });
-
-app.post("/payment", (req, res) => {
+/* app.post("/payment", (req, res) => {
   // token that contains the info on the product and user
   const { order, token } = req.body;
   console.log("order", order);
@@ -77,7 +71,7 @@ app.post("/payment", (req, res) => {
       res.status(200).json(result);
     })
     .catch((err) => console.log(err));
-});
+}); */
 
 // listen
 app.listen(process.env.PORT, () => console.log(`app on ${process.env.PORT}`));
