@@ -1,0 +1,27 @@
+{
+  "name": "stripepayment__gateway",
+  "version": "1.0.0",
+  "description": "A server-side implementation of the StripePayment Gateway that uses a Prebuilt UI from stripe ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vatsal272120/StripePayment__Gateway.git"
+  },
+  "author": "Vatsal Patel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vatsal272120/StripePayment__Gateway/issues"
+  },
+  "homepage": "https://github.com/Vatsal272120/StripePayment__Gateway#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7",
+    "stripe": "^8.150.0"
+  }
+}
